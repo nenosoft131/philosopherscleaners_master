@@ -14,7 +14,7 @@ class User(BaseModel):
     last_name: str
     user_id: str
     email: EmailStr
-    user_type: UserRole
+    user_role: UserRole
     is_active: bool
 
 

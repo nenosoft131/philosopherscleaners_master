@@ -1,5 +1,8 @@
 from app.service.interfaces.password_hasher_interface import IPasswordHasher
 import bcrypt
+from typing import Final
+
+BCRYPT_ROUNDS: Final[int] = 12
 
 
 class HashingService(IPasswordHasher):
@@ -13,12 +16,12 @@ class HashingService(IPasswordHasher):
             raise ValueError("Password cannot be empty")
 
         pwd_bytes = password.encode("utf-8")
-        salt = bcrypt.gensalt(10)
+        salt = bcrypt.gensalt(rounds=BCRYPT_ROUNDS)
         hashed = bcrypt.hashpw(pwd_bytes, salt=salt)
         return hashed.decode("utf-8")
 
     @staticmethod
-    def validate_password(hash_password: str, plain_password: str):
+    def validate_password(plain_password: str, hash_password: str):
         if not isinstance(hash_password, str):
             raise TypeError(
                 f"Invalid password type: expected str, got {type(hash_password).__name__}"

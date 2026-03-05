@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from enum import Enum
+from typing import Optional
 
 
 class UserRole(str, Enum):
@@ -9,14 +10,28 @@ class UserRole(str, Enum):
 
 
 class User(BaseModel):
-    id: int
     first_name: str
     last_name: str
-    user_id: str
     email: EmailStr
+    number: Optional[str] = None
+    address: Optional[str] = None
     user_role: UserRole
-    is_active: bool
+    is_active: Optional[bool] = None
 
 
 class CreateUserInput(User):
-    password_hash: str
+    hash_password: str
+
+
+class UserOutput(User):
+    id: int
+
+
+class LoginInput(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class LoginOutput(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

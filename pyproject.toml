@@ -13,4 +13,5 @@ dependencies = [
     "aiosqlite>=0.22.1",
     "bcrypt>=5.0.0",
     "python-jose>=3.5.0",
+    "pyqt5>=5.15.11",
 ]

@@ -1,12 +1,12 @@
 from fastapi import APIRouter
-
+from app.schema.order import Order
 
 router = APIRouter(prefix="/order", tags=["order"])
 
 
 @router.post("/place")
-async def place_order():
-    pass
+async def place_order(order: Order):
+    
 
 
 @router.get("/orderlist")

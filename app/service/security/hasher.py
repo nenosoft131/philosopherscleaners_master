@@ -21,17 +21,17 @@ class HashingService(IPasswordHasher):
         return hashed.decode("utf-8")
 
     @staticmethod
-    def validate_password(plain_password: str, hash_password: str):
-        if not isinstance(hash_password, str):
+    def validate_password(plain_password: str, hashed_password: str):
+        if not isinstance(hashed_password, str):
             raise TypeError(
-                f"Invalid password type: expected str, got {type(hash_password).__name__}"
+                f"Invalid password type: expected str, got {type(hashed_password).__name__}"
             )
         if not isinstance(plain_password, str):
             raise TypeError(
                 f"Invalid password type: expected str, got {type(plain_password).__name__}"
             )
         try:
-            hash_encode = hash_password.encode("utf-8")
+            hash_encode = hashed_password.encode("utf-8")
             plain_encode = plain_password.encode("utf-8")
             return bcrypt.checkpw(plain_encode, hashed_password=hash_encode)
         except (ValueError, TypeError, bcrypt.errors.InvalidSalt) as e:

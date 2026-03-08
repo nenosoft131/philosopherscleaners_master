@@ -7,5 +7,5 @@ class IPasswordHasher(ABC):
         pass
 
     @abstractmethod
-    def validate_password(hash_password: str, plain_password: str):
+    def validate_password(hashed_password: str, plain_password: str):
         pass

@@ -20,11 +20,12 @@ class User(BaseModel):
 
 
 class CreateUserInput(User):
-    hash_password: str
+    hashed_password: str
 
 
 class UserOutput(User):
     id: int
+    model_config = {"from_attributes": True}
 
 
 class LoginInput(BaseModel):

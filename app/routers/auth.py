@@ -1,20 +1,12 @@
 from fastapi import APIRouter, Depends
 from app.schema.user import CreateUserInput, LoginInput
 from app.service.interfaces.user_service_interface import IUserService
-from app.service.interfaces.password_hasher_interface import IPasswordHasher
-from app.service.userservice.user_service import UserService
-from app.db.session import AsyncSession, get_async_db_session
-from app.service.userservice.register_user import RegisterUser
-from app.service.userservice.login_user import LoginUser
+from app.service.user.register_user import RegisterUser
+from app.service.user.login_user import LoginUser
+from app.utils.dependencies import get_user_service
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-
-
-def get_user_service(
-    session: AsyncSession = Depends(get_async_db_session),
-) -> IUserService:
-    return UserService(session=session)
 
 
 @router.get("/status")

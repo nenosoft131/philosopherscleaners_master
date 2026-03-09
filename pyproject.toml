@@ -16,4 +16,5 @@ dependencies = [
     "pyqt5>=5.15.11",
     "pyyaml>=6.0.3",
     "pyserial>=3.5",
+    "pytest>=8.4.2",
 ]
